@@ -33,23 +33,24 @@ function LoginPage() {
   return (
     <div className="max-w-md mx-auto mt-10 p-6 border rounded">
       <h2 className="text-2xl font-bold mb-4">🔐 เข้าสู่ระบบ</h2>
+
       <input
         type="text"
-        placeholder="Username"
-        className="w-full p-2 border mb-3"
+        placeholder="ชื่อผู้ใช้"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
+        className="w-full p-2 mb-3 border rounded"
       />
       <input
         type="password"
-        placeholder="Password"
-        className="w-full p-2 border mb-3"
+        placeholder="รหัสผ่าน"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
+        className="w-full p-2 mb-3 border rounded"
       />
       <button
-        className="bg-blue-500 text-white w-full py-2 rounded"
         onClick={handleLogin}
+        className="bg-blue-600 text-white py-2 px-4 w-full rounded"
       >
         🔐 เข้าสู่ระบบ
       </button>
