@@ -1,28 +1,28 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"; // ✅ เพิ่ม
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { login } = useAuth();
-  const navigate = useNavigate(); // ✅ ใช้ navigate
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
-const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/login`, {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ username, password }),
-});
-
+      // ✅ username และ password ต้องอยู่ใน scope นี้
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
 
       const data = await res.json();
 
       if (res.ok) {
-        login(data.token); // บันทึก token
+        login(data.token);
         alert("✅ เข้าสู่ระบบสำเร็จ");
-        navigate("/"); // ✅ ไปหน้า App หลัก
+        navigate("/");
       } else {
         alert("❌ " + data.message);
       }
