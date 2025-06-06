@@ -10,7 +10,6 @@ function LoginPage() {
 
   const handleLogin = async () => {
     try {
-      // ✅ username และ password ต้องอยู่ใน scope นี้
       const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
