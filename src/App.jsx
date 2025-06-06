@@ -30,13 +30,12 @@ function App() {
   const deleteRecipe = async (id) => {
     if (!window.confirm("คุณต้องการลบเมนูนี้หรือไม่?")) return;
 
-const res = await fetch(`${import.meta.env.VITE_API_URL}/api/recipes/${id}`, {
-  method: "DELETE",
-  headers: {
-    Authorization: `Bearer ${token}`,
-  },
-});
-
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/recipes/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
     if (res.ok) {
       alert("✅ ลบสำเร็จ");
@@ -52,15 +51,14 @@ const res = await fetch(`${import.meta.env.VITE_API_URL}/api/recipes/${id}`, {
       ingredients: editForm.ingredients.split(",").map((i) => i.trim()),
     };
 
-const res = await fetch(`${import.meta.env.VITE_API_URL}/api/recipes/${editForm._id}`, {
-  method: "PUT",
-  headers: {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${token}`,
-  },
-  body: JSON.stringify(updated),
-});
-
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/recipes/${editForm._id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(updated),
+    });
 
     if (res.ok) {
       alert("✅ แก้ไขสำเร็จ");
@@ -76,14 +74,13 @@ const res = await fetch(`${import.meta.env.VITE_API_URL}/api/recipes/${editForm.
     formData.append("image", file);
 
     try {
-const res = await fetch(`${import.meta.env.VITE_API_URL}/api/recipes/upload`, {
-  method: "POST",
-  headers: {
-    Authorization: `Bearer ${token}`,
-  },
-  body: formData,
-});
-
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/recipes/upload`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      });
 
       const data = await res.json();
       return data.imageUrl;
@@ -147,7 +144,7 @@ const res = await fetch(`${import.meta.env.VITE_API_URL}/api/recipes/upload`, {
           <div key={r._id} className="bg-white p-4 rounded shadow mb-4">
             {r.imageUrl && (
               <img
-                src={`http://localhost:5000/${r.imageUrl}`}
+                src={`${import.meta.env.VITE_API_URL}/${r.imageUrl}`}
                 alt={r.name}
                 className="w-full h-64 object-cover rounded mb-2"
               />
@@ -187,7 +184,7 @@ const res = await fetch(`${import.meta.env.VITE_API_URL}/api/recipes/upload`, {
 
                 {editForm.imageUrl && (
                   <img
-                    src={`http://localhost:5000/${editForm.imageUrl}`}
+                    src={`${import.meta.env.VITE_API_URL}/${editForm.imageUrl}`}
                     alt="preview"
                     className="w-full h-48 object-cover rounded mb-2"
                   />
