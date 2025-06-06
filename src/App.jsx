@@ -30,12 +30,13 @@ function App() {
   const deleteRecipe = async (id) => {
     if (!window.confirm("คุณต้องการลบเมนูนี้หรือไม่?")) return;
 
-    const res = await fetch(`http://localhost:5000/api/recipes/${id}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+const res = await fetch(`${import.meta.env.VITE_API_URL}/api/recipes/${id}`, {
+  method: "DELETE",
+  headers: {
+    Authorization: `Bearer ${token}`,
+  },
+});
+
 
     if (res.ok) {
       alert("✅ ลบสำเร็จ");
@@ -51,14 +52,15 @@ function App() {
       ingredients: editForm.ingredients.split(",").map((i) => i.trim()),
     };
 
-    const res = await fetch(`http://localhost:5000/api/recipes/${editForm._id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(updated),
-    });
+const res = await fetch(`${import.meta.env.VITE_API_URL}/api/recipes/${editForm._id}`, {
+  method: "PUT",
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
+  },
+  body: JSON.stringify(updated),
+});
+
 
     if (res.ok) {
       alert("✅ แก้ไขสำเร็จ");
@@ -74,13 +76,14 @@ function App() {
     formData.append("image", file);
 
     try {
-      const res = await fetch("http://localhost:5000/api/recipes/upload", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: formData,
-      });
+const res = await fetch(`${import.meta.env.VITE_API_URL}/api/recipes/upload`, {
+  method: "POST",
+  headers: {
+    Authorization: `Bearer ${token}`,
+  },
+  body: formData,
+});
+
 
       const data = await res.json();
       return data.imageUrl;
