@@ -7,22 +7,22 @@ function AddRecipeForm({ onRecipeAdded }) {
     ingredients: "",
     duration: "5 - 10 mins",
     difficulty: "ง่าย",
-    imageFile: null, // ⬅️ เพิ่ม
+    imageFile: null,
   });
 
   const { token } = useAuth();
 
   const handleImageUpload = async () => {
-    const data = new FormData();
-    data.append("image", form.imageFile);
+    const formData = new FormData();
+    formData.append("image", form.imageFile);
 
-const res = await fetch(`${import.meta.env.VITE_API_URL}/api/recipes/upload`, {
-  method: "POST",
-  headers: {
-    Authorization: `Bearer ${token}`,
-  },
-  body: formData,
-});
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/recipes/upload`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    });
 
     const json = await res.json();
     return json.imageUrl;
@@ -45,7 +45,7 @@ const res = await fetch(`${import.meta.env.VITE_API_URL}/api/recipes/upload`, {
     };
 
     try {
-      const res = await fetch("http://localhost:5000/api/recipes", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/recipes`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -108,15 +108,12 @@ const res = await fetch(`${import.meta.env.VITE_API_URL}/api/recipes/upload`, {
         <option>ปานกลาง</option>
         <option>ยาก</option>
       </select>
-
-      {/* ✅ ปุ่มเลือกรูป */}
       <input
         type="file"
         accept="image/*"
         onChange={(e) => setForm({ ...form, imageFile: e.target.files[0] })}
         className="border p-2 rounded"
       />
-
       <button className="bg-green-500 text-white px-4 py-2 rounded">
         ✅ บันทึกสูตรอาหาร
       </button>
