@@ -16,13 +16,13 @@ function AddRecipeForm({ onRecipeAdded }) {
     const data = new FormData();
     data.append("image", form.imageFile);
 
-    const res = await fetch("http://localhost:5000/api/recipes/upload", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      body: data,
-    });
+const res = await fetch(`${import.meta.env.VITE_API_URL}/api/recipes/upload`, {
+  method: "POST",
+  headers: {
+    Authorization: `Bearer ${token}`,
+  },
+  body: formData,
+});
 
     const json = await res.json();
     return json.imageUrl;
