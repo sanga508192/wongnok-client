@@ -1,7 +1,8 @@
+// vite.config.js
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
-  base: '/', // ✅ ใช้ root path เพราะ Render deploy ที่ / ไม่ใช่ subfolder
+  base: '/wongnok-client/', // ✅ ต้องตรงกับชื่อ repo
   plugins: [react()],
 })
